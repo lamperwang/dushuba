@@ -1,0 +1,19 @@
+
+<div id='comment_<%=comment.id%>'>
+ 
+<p style="margin:20px;">
+  <div style="font-size:13px;"><%= comment.body %></div>
+  <div>By <i><%=comment.commenter%>&nbsp;&nbsp;<%=l(comment.created_at, :format=>:long) %></i>
+ 
+  [<%= link_to '删除', [comment.book, comment],
+        :confirm => 'Are you sure?',
+#	:remote=>true,	
+	:cid=>comment.id,
+	:"data-toggle"=>:"modal",
+
+        :method => :delete %>]
+  </div>
+</p>
+
+<hr>
+</div>

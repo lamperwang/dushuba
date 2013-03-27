@@ -1,0 +1,82 @@
+<%- model_class = Book -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @book.name %></dd>
+
+  <dt><strong><%= t(:author) %>:</strong></dt>
+  <dd><%= @book.author %>&nbsp;</dd>
+
+
+  <dt><strong><%= :"publish by" %>:</strong></dt>
+  <dd><%= @book.publish_by %>&nbsp;</dd>
+
+  <dt><strong><%= :"publish year"%>:</strong></dt>
+  <dd><%= @book.publish_year %>&nbsp;</dd>
+
+  <dt><strong><%= :Pages%>:</strong></dt>
+  <dd><%= @book.pages %>&nbsp;</dd>
+
+  <dt><strong><%= :"Price"%>:</strong></dt>
+  <dd><%= @book.price %>&nbsp;</dd>
+
+  <dt><strong><%= model_class.human_attribute_name(:isbn) %>:</strong></dt>
+  <dd><%= @book.isbn %></dd>
+
+
+  <dt><strong><%= :cover %>:</strong></dt>
+  <dd><%= image_tag @book.cover.url(:medium) %></dd>
+
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @book.description %></dd>
+
+  <dt><strong>Tags:</strong></dt>
+  <dd><%= join_tags(@book) %></dd>
+</dl>
+
+
+<dl class="dl-horizontal">
+  <dt><b>评价</b></dt>
+  <dd id="comments">
+    <%= render @book.comments %>
+  </dd>
+</dl>
+<div class="modal hide" id="delCommentModal">
+
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">x</button>
+        <h4>Are you sure remove this comment ?</h4>
+    </div>
+<!--
+    <div class="modal-body">
+        <p><img scr="URL"> Any HTML elements. </p>
+    </div>
+-->
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal">Close</button>
+        <button id='btnDelComment' class="btn btn-primary">Delete</button>
+    </div>
+</div>
+
+
+<dl class="dl-horizontal">
+  <dt><b>发表评论:</b></dt>
+  <dd><%= render "comments/form" %></dd>
+</dl>
+ 
+
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              books_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_book_path(@book), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              book_path(@book),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

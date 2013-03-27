@@ -1,0 +1,97 @@
+
+<% @book.tags.build %>
+
+<%= form_for @book, :html => { :multipart => true, :class => 'form-horizontal ajax', :'data-append'=>'body' } do |f| %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label t(:author), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :author, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label t(:publish_by), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :publish_by, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :"Publish year", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :publish_year, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :pages, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :pages, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :price, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :price, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :isbn, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :isbn, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :Cover, :class => 'control-label' %>
+
+<!--
+    <div class="controls">
+      <%= f.file_field :cover %>
+    </div>
+-->
+
+
+    <div class="uploader white controls">
+<input type="text" class="filename" readonly="readonly"/>
+<input type="button" name="file" class="button" value="Browse..."/>
+<!--<input type="file" size="30"/>-->
+<%= f.file_field :cover %>
+
+</div>
+
+  </div>
+
+
+
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :description, :class => 'text_area' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :Tags, :class => 'control-label' %>
+    <div class="controls">
+      <%= render :partial => 'tags/form',
+             :locals => {:form => f} %>
+    </div>
+  </div>
+
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                books_path, :class => 'btn' %>
+  </div>
+<% end %>
