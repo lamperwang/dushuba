@@ -1,37 +1,36 @@
 <%- model_class = Book -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h1><%= @book.name %></h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @book.name %></dd>
+  
+ 
+  <dd><%= image_tag @book.cover.url(:medium) %></dd>
 
-  <dt><strong><%= t(:author) %>:</strong></dt>
+  <dt><strong>作者:</strong></dt>
   <dd><%= @book.author %>&nbsp;</dd>
 
 
-  <dt><strong><%= :"publish by" %>:</strong></dt>
+  <dt><strong>出版社:</strong></dt>
   <dd><%= @book.publish_by %>&nbsp;</dd>
 
-  <dt><strong><%= :"publish year"%>:</strong></dt>
+  <dt><strong>出版日期:</strong></dt>
   <dd><%= @book.publish_year %>&nbsp;</dd>
 
-  <dt><strong><%= :Pages%>:</strong></dt>
+  <dt><strong>页数:</strong></dt>
   <dd><%= @book.pages %>&nbsp;</dd>
 
-  <dt><strong><%= :"Price"%>:</strong></dt>
+  <dt><strong>定价:</strong></dt>
   <dd><%= @book.price %>&nbsp;</dd>
 
   <dt><strong><%= model_class.human_attribute_name(:isbn) %>:</strong></dt>
   <dd><%= @book.isbn %></dd>
 
 
-  <dt><strong><%= :cover %>:</strong></dt>
-  <dd><%= image_tag @book.cover.url(:medium) %></dd>
 
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @book.description %></dd>
+  <dt><strong>简介:</strong></dt>
+  <dd><%= simple_format h(@book.description) %></dd>
 
   <dt><strong>Tags:</strong></dt>
   <dd><%= join_tags(@book) %></dd>
@@ -72,8 +71,7 @@
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               books_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_book_path(@book), :class => 'btn' %>
+  
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               book_path(@book),
               :method => 'delete',

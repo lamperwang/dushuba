@@ -2,7 +2,7 @@
 <div id='comment_<%=comment.id%>'>
  
 <p style="margin:20px;">
-  <div style="font-size:13px;"><%= comment.body %></div>
+  <div style="font-size:13px;"><%= simple_format h(comment.body) %></div>
   <div>By <i><%=comment.commenter%>&nbsp;&nbsp;<%=l(comment.created_at, :format=>:long) %></i>
  
   [<%= link_to '删除', [comment.book, comment],

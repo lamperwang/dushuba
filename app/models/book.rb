@@ -3,24 +3,17 @@ class Book < ActiveRecord::Base
 
   #include Paperclip::Glue
 
-  has_attached_file :cover, 
+  has_attached_file :cover,
     :default_style => :thumb,
     :url => "/uploadfiles/:class/:attachment/:id/:basename/:style.:extension",
     :path => ":rails_root/public/uploadfiles/:class/:attachment/:id/:basename/:style.:extension",
-    :styles => { :medium => "300x441>", :thumb => "100x147>" }, :default_url => "/images/:style/missing.png"
+    :styles => { :medium => "103x143>", :thumb => "68x95>", :large=>"309x429" }, :default_url => "/images/:style/missing.png"
 
   validates_attachment_content_type :cover, :content_type => 'image/jpeg'
 
   validates :name,  :presence => true
   validates :isbn,  :presence => true,
                     :length => { :minimum => 5 }
-
-
-
-
-
-
-
 
 
 
@@ -32,5 +25,10 @@ class Book < ActiveRecord::Base
  
   accepts_nested_attributes_for :tags, :allow_destroy => :true,
     :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
+    
+  def self.find_by_isbn(isbn)
+    where("isbn=?", isbn).first
+  
+  end
 
 end

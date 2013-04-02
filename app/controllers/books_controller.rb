@@ -44,19 +44,74 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = Book.new(params[:book])
-    @userbook = UserBook.new(:user=>current_user, :book=>@book)
+    
+    @book = Book.find_by_isbn(params[:book][:isbn])
+    
+    
+    if(!@book)
+      
+      @book = Book.new(params[:book])
+    
+      data = Douban.book(params[:book][:isbn]).parsed_response
 
-
+      if(data['code']==6000)
+        respond_to do |format|
+          format.html { render action: "new", notice:'ISBN不存在' }
+          format.json { render :json=>{:ret=>1, :html=>"ISBN不存在"} }
+        end
+        return
+      end
+    
+      tmpPath = '/tmp/xxxxa'+rand(10000).to_s+'.jpg'
+    
+      Douban.download_to_file(data['images']['large'],tmpPath)
+      
+      tmpfile = File.open(tmpPath,'rb');
+    
+      @book.cover = tmpfile;
+    
+      @book.name = data['title']
+      @book.publish_year = data['pubdate']
+      @book.package = data['binding']
+      @book.author = data['author']
+      @book.description = data['summary']
+      @book.publish_by = data['publisher']
+      @book.price = data['price']
+      @book.pages = data['pages']
+      
+      
+    else
+      
+      
+      
+      
+    end
+    
+    
+    
 
 
     respond_to do |format|
-      if @book.save && @userbook.save 
+      if @book.save 
+        
+        @userbook = UserBook.find_by_user_and_book(current_user, @book)
+        if(!@userbook)
+          @userbook = UserBook.new(:user=>current_user, :book=>@book)
+        
+          @userbook.save 
+          
+        end
+        
+         
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render :json=>{:ret=>0,:location=>url_for( @book)}, location: @book }
       else
         format.html { render action: "new" }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
+        format.json { render :json=>{:ret=>2, :error=>@book.error}, status: :unprocessable_entity }
+      end
+      
+      if(tmpPath)
+        File.unlink(tmpPath)
       end
     end
   end

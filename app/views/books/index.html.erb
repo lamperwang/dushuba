@@ -9,7 +9,7 @@
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:isbn) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -17,13 +17,12 @@
     <% @books.each do |book| %>
       <tr>
         
-        <td><%= link_to book.name, book_path(book) %></td>
+        <td nowrap><%= link_to book.name, book_path(book) %></td>
         <td><%= book.isbn %></td>
-        <td><%= book.description %></td>
-        <td><%=l( book.created_at ,:format => :default) %></td>
+        <td><%= simple_format h(book.description) %></td>
+        
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_book_path(book), :class => 'btn btn-mini' %>
+          
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       book_path(book),
                       :method => :delete,
