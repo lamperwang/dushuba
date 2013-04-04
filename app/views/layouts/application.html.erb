@@ -77,10 +77,9 @@
               <ul class="nav">
                 <li <%=self.controller_path=='home'?'class=active':''%>><a href="/">Home</a></li>
 		<li <%=self.controller_path=='books'?'class=active':''%>><%= link_to "Books", books_path  %></li>
-                <li <%=self.controller_path=='about'?'class=active':''%>><a href="#about">About</a></li>
-                <li <%=self.controller_path=='contact'?'class=active':''%>><a href="#contact">Contact</a></li>
-                <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
-                <li class="dropdown">
+                <li <%=self.controller_path=='profile'?'class=active':''%>><a href="/profile">My Profile</a></li>
+                <!--
+				<li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href="#">Action</a></li>
@@ -92,6 +91,7 @@
                     <li><a href="#">One more separated link</a></li>
                   </ul>
                 </li>
+					-->
               </ul>
             </div><!--/.nav-collapse -->
           </div><!-- /.navbar-inner -->
