@@ -1,4 +1,5 @@
 log/
+public/uploadfiles
 *.swp
 .DS_Store
 .bundle
