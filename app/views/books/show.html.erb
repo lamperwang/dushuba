@@ -3,45 +3,88 @@
   <h1><%= @book.name %></h1>
 </div>
 
-<dl class="dl-horizontal">
+
+<div class="media">
+  <a class="pull-left" href="#">
+    <%= image_tag @book.cover.url(:large) %>
+  </a>
+  <div class="media-body">
+	
+	<dl class="dl-horizontal">
   
- 
-  <dd><%= image_tag @book.cover.url(:medium) %></dd>
 
-  <dt><strong>作者:</strong></dt>
-  <dd><%= @book.author %>&nbsp;</dd>
+	  <dt><strong>作者:</strong></dt>
+	  <dd><%= @book.author %>&nbsp;</dd>
 
 
-  <dt><strong>出版社:</strong></dt>
-  <dd><%= @book.publish_by %>&nbsp;</dd>
+	  <dt><strong>出版社:</strong></dt>
+	  <dd><%= @book.publish_by %>&nbsp;</dd>
 
-  <dt><strong>出版日期:</strong></dt>
-  <dd><%= @book.publish_year %>&nbsp;</dd>
+	  <dt><strong>出版日期:</strong></dt>
+	  <dd><%= @book.publish_year %>&nbsp;</dd>
 
-  <dt><strong>页数:</strong></dt>
-  <dd><%= @book.pages %>&nbsp;</dd>
+	  <dt><strong>页数:</strong></dt>
+	  <dd><%= @book.pages %>&nbsp;</dd>
 
-  <dt><strong>定价:</strong></dt>
-  <dd><%= @book.price %>&nbsp;</dd>
+	  <dt><strong>定价:</strong></dt>
+	  <dd><%= @book.price %>&nbsp;</dd>
 
-  <dt><strong><%= model_class.human_attribute_name(:isbn) %>:</strong></dt>
-  <dd><%= @book.isbn %></dd>
+	  <dt><strong><%= model_class.human_attribute_name(:isbn) %>:</strong></dt>
+	  <dd><%= @book.isbn %></dd>
 
 
 
-  <dt><strong>简介:</strong></dt>
-  <dd><%= simple_format h(@book.description) %></dd>
+	  <dt><strong>简介:</strong></dt>
+	  <dd><%= simple_format h(@book.description) %></dd>
 
-  <dt><strong>Tags:</strong></dt>
-  <dd><%= join_tags(@book) %></dd>
+	  <dt><strong>Tags:</strong></dt>
+	  <dd><%= join_tags(@book) %></dd>
+	  
+	  
+	  
+	</dl>
+	
+	
+    
+    
+  </div>
+</div>
+
+
+
+<dl class="dl-horizontal">
+
+  <dt><b>谁有这本书:</b></dt>
+  <dd>
+    <% @book.users.each do |user|  %>
+
+	<div class="btn-group">
+	  <a class="btn dropdown-toggle btn-success btn-mini" data-toggle="dropdown" href="#">
+	    <%= user.nickname %> 
+	    <span class="caret"></span>
+	  </a>
+	  <ul class="dropdown-menu btn-mini">
+	    <li><a href="/profile/<%= user.id%>">查看<%= user.nickname %>的资料</a></li>
+		<li><a href="#">发消息给<%= user.nickname %></a></li>
+		<li><a href="#">向<%= user.nickname %>借阅</a></li>
+	
+	  </ul>
+	</div>
+
+
+    <% end %>
+  </dd>
 </dl>
 
-
-<dl class="dl-horizontal">
-  <dt><b>评价</b></dt>
+<dl class="dl-horizontal">  
+  <dt><b>评价:</b></dt>
   <dd id="comments">
-    <%= render @book.comments %>
+    <%= render @book.comments %>&nbsp;
   </dd>
+  
+  <dt><b>发表评论:</b></dt>
+  <dd><%= render "comments/form" %></dd>
+  
 </dl>
 <div class="modal hide" id="delCommentModal">
 
@@ -61,11 +104,6 @@
 </div>
 
 
-<dl class="dl-horizontal">
-  <dt><b>发表评论:</b></dt>
-  <dd><%= render "comments/form" %></dd>
-</dl>
- 
 
 
 <div class="form-actions">

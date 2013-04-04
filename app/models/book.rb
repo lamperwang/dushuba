@@ -18,10 +18,12 @@ class Book < ActiveRecord::Base
 
 
   has_many :user_books, :dependent => :destroy
-  has_many :user, :through=>:user_books
+  has_many :users, :through=>:user_books
 
   has_many :comments, :dependent => :destroy
-  has_many :tags, :dependent => :destroy
+  has_many :book_tagships, :dependent => :destroy
+  has_many :tags, :through=> :book_tagships
+  
  
   accepts_nested_attributes_for :tags, :allow_destroy => :true,
     :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }

@@ -17,7 +17,10 @@
     <% @books.each do |book| %>
       <tr>
         
-        <td nowrap><%= link_to book.name, book_path(book) %></td>
+        <td nowrap>
+            <div  align="center"><%= link_to (image_tag book.cover.url(:medium)), book_path(book) %></div>
+			<div  align="center"><%= link_to book.name, book_path(book) %></div>
+        </td>
         <td><%= book.isbn %></td>
         <td><%= simple_format h(book.description) %></td>
         

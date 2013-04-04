@@ -1,13 +1,19 @@
 Dushuba::Application.routes.draw do
 
+  get "profile/index"
+
   get "home/index"
 
   devise_for :users
 
   resources :books do
     resources :comments
+    resources :tags
   end
 
+  resources :profile
+
+  match 'books/tag/:id' => 'books#tag'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

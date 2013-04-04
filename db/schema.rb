@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130323102946) do
+ActiveRecord::Schema.define(:version => 20130403151827) do
+
+  create_table "book_tagships", :force => true do |t|
+    t.integer  "book_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "books", :force => true do |t|
     t.string   "name"
@@ -43,12 +50,9 @@ ActiveRecord::Schema.define(:version => 20130323102946) do
 
   create_table "tags", :force => true do |t|
     t.string   "name"
-    t.integer  "book_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  add_index "tags", ["book_id"], :name => "index_tags_on_book_id"
 
   create_table "user_books", :force => true do |t|
     t.integer  "user_id"

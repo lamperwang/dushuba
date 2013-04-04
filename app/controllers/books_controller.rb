@@ -18,6 +18,7 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @comments = @book.comments;
+    @users = @book.users;
 
     respond_to do |format|
       format.html # show.html.erb
@@ -45,14 +46,16 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     
-    @book = Book.find_by_isbn(params[:book][:isbn])
+    isbn = params[:book][:isbn]
+    
+    @book = Book.find_by_isbn(isbn)
     
     
     if(!@book)
       
-      @book = Book.new(params[:book])
+      
     
-      data = Douban.book(params[:book][:isbn]).parsed_response
+      data = Douban.book(isbn).parsed_response
 
       if(data['code']==6000)
         respond_to do |format|
@@ -67,24 +70,32 @@ class BooksController < ApplicationController
       Douban.download_to_file(data['images']['large'],tmpPath)
       
       tmpfile = File.open(tmpPath,'rb');
-    
-      @book.cover = tmpfile;
-    
-      @book.name = data['title']
-      @book.publish_year = data['pubdate']
-      @book.package = data['binding']
-      @book.author = data['author']
-      @book.description = data['summary']
-      @book.publish_by = data['publisher']
-      @book.price = data['price']
-      @book.pages = data['pages']
       
+      @book = Book.new do  |b|
+        b.isbn = isbn
+        b.cover = tmpfile;
+        b.name = data['title']
+        b.publish_year = data['pubdate']
+        b.package = data['binding']
+        b.author = data['author']
+        b.description = data['summary']
+        b.publish_by = data['publisher']
+        b.price = data['price']
+        b.pages = data['pages']
+      end
       
-    else
-      
-      
-      
-      
+      data['tags'].each do |tag|
+        
+        @t = Tag.where(:name=>tag['name']).first
+        if(!@t)
+          @t = Tag.new(:name=>tag['name'])
+          @t.save()
+        end
+        
+        @bt = BookTagship.new(:tag=>@t, :book=>@book)
+        @bt.save()
+      end
+   
     end
     
     
@@ -143,4 +154,13 @@ class BooksController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def tag
+    
+    @tag = Tag.where(:name=>params[:id]).first
+    @books = @tag.books
+    
+    
+  end
+  
 end

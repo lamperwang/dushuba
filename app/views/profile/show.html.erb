@@ -1,0 +1,50 @@
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%= @user.nickname %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  
+
+  <dt><strong>爱好特长:</strong></dt>
+  <dd>IT 写作 体育</dd>
+  
+  <dt><strong>Email:</strong></dt>
+  <dd><%= @user.email %>&nbsp;</dd>
+  
+  <dt><strong>活跃度:</strong></dt>
+  <dd><%= @user.sign_in_count %>&nbsp;</dd>
+  
+  <dt><strong>注册时间:</strong></dt>
+  <dd><%= @user.created_at %>&nbsp;</dd>
+  
+  <dt><strong>最近活跃于:</strong></dt>
+  <dd><%= @user.last_sign_in_at %>&nbsp;</dd>
+  
+  <dt><strong>Ta的书:</strong></dt>
+  <dd>
+	  <% 
+	  i = 0
+	  @user.books.each do |book| 
+	    i=i+1  
+	  %>
+	  
+	  <div style="width:140px;float:left;" align="center">
+		<div><%= link_to (image_tag book.cover.url(:medium)), book_path(book) %></div>
+		<div><%= link_to book.name, book_path(book) %></div>
+	  </div>
+	  
+	  <% 
+	  if i%5==0
+		  %>
+		  <div class="clearfix"></div>
+		  <%
+	  end
+	  
+	  end%>
+	
+  </dd>
+  
+
+
+</dl>
