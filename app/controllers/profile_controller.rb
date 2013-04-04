@@ -1,5 +1,11 @@
 class ProfileController < ApplicationController
+  before_filter :authenticate_user!
+  
   def index
+    
+    if current_user
+      redirect_to :action=>'show', :id=>@current_user.id
+    end
   end
 
   def show
