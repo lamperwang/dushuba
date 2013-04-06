@@ -9,7 +9,9 @@ gem 'mysql2'
 gem 'devise'
 
 gem 'oauth'
+
 gem 'paperclip'
+
 gem 'httparty'
 
 gem "therubyracer"
@@ -44,3 +46,12 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'omniauth'
+gem 'omniauth-oauth'
+gem 'omniauth-github'
+gem 'omniauth-facebook'
+gem "omniauth-google-oauth2"
+
+gem 'omniauth-qq'
+#gem 'omniauth-weibo-oauth2'
