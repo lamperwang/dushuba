@@ -54,4 +54,9 @@ gem 'omniauth-facebook'
 gem "omniauth-google-oauth2"
 gem 'omniauth-tqq-oauth2'
 gem 'omniauth-qq'
+<<<<<<< HEAD
 gem 'omniauth-weibo-oauth2'
+=======
+#gem 'omniauth-weibo-oauth2'
+
+>>>>>>> ccd217652debee729fba7a8c443207d7beb90ee9
