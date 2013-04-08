@@ -226,8 +226,10 @@ Devise.setup do |config|
              :approval_prompt => "auto"
            }
 
-  require 'omniauth-qq'
-  config.omniauth :tqq, '801337824', '4bfb06b87385d0dbf089e26213f4406b', :scope =>'user'
+  config.omniauth :tqq2, '801337824', '4bfb06b87385d0dbf089e26213f4406b', :scope =>'user'
+  config.omniauth :qq_connect, '100413395', '1ea9fec393080c7096e61e47bf022974', :scope =>'user'
+
+  config.omniauth :weibo, '137450646', 'dfa5700f754654b0baeec615c98326de', :scope=>'user'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

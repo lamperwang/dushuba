@@ -5,7 +5,10 @@
 
 <dl class="dl-horizontal">
   
-
+	<% if @user.head %>
+  <dt><strong></strong></dt>
+  <dd><%= image_tag @user.head %></dd>
+  <% end %>
   <dt><strong>爱好特长:</strong></dt>
   <dd>IT 写作 体育</dd>
   

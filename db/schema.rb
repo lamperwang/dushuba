@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130405152904) do
+ActiveRecord::Schema.define(:version => 20130406071642) do
 
   create_table "book_tagships", :force => true do |t|
     t.integer  "book_id"
@@ -48,6 +48,16 @@ ActiveRecord::Schema.define(:version => 20130405152904) do
 
   add_index "comments", ["book_id"], :name => "index_comments_on_book_id"
 
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
   create_table "tags", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -77,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20130405152904) do
     t.string   "nickname"
     t.string   "provider"
     t.string   "uid"
+    t.string   "head"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

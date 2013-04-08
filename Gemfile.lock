@@ -110,6 +110,12 @@ GEM
       multi_json
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
+    omniauth-tqq-oauth2 (0.0.4)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
+    omniauth-weibo-oauth2 (0.2.0)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
     orm_adapter (0.4.0)
     paperclip (3.4.1)
       activemodel (>= 3.0.0)
@@ -190,6 +196,8 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-oauth
   omniauth-qq
+  omniauth-tqq-oauth2
+  omniauth-weibo-oauth2
   paperclip
   rails (= 3.2.12)
   sass-rails (~> 3.2.3)
