@@ -73,7 +73,6 @@ GEM
       actionpack (>= 3.1)
       less (~> 2.3.1)
     libv8 (3.11.8.13)
-    magic_encoding (0.0.2)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -189,7 +188,6 @@ DEPENDENCIES
   httparty
   jquery-rails
   less-rails
-  magic_encoding
   mysql2
   oauth
   omniauth
