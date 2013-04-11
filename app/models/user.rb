@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :user_books, :dependent => :destroy 
   has_many :books, :through=>:user_books
-
+  has_many :user_book_requests
 
   def self.find_for_github_oauth(auth, signed_in_resource=nil)
 

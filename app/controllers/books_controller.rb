@@ -161,7 +161,15 @@ class BooksController < ApplicationController
   def tag
     
     @tag = Tag.where(:name=>params[:id]).first
-    @books = @tag.books
+    if(!@tag)
+      respond_to do |format|
+        format.html { redirect_to books_url, notice: params[:id] + ' not exists!'}
+      end
+    else
+      @books = @tag.books
+      
+    end
+    
     
     
   end

@@ -19,8 +19,16 @@ $(function(){
   /* Your javascripts goes here... */
 
 
-    $('#delCommentModal').modal({center:true,show:false});
 
+
+	$('.requestbook').on('click',function(){
+		
+		$('#requestbookModal').modal({center:true,show:true});
+		$('.modalTitle').html("向"+ $(this).attr('nickname')+"借《"+$('#bookName').html()+"》，说点啥：");
+		return false;
+		
+		
+	});
 
     $("#comments a").on('click',  function(event) {
         event.preventDefault(); // prevent the click from linking anywhere
