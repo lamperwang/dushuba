@@ -123,12 +123,14 @@
 
     <div class="modal-body">
 		
-        <p> <textarea style="width:500px;height:50px;" id="requestbooktxt"></textarea> </p>
+        <p> <textarea style="width:500px;height:50px;" id="requestbookmessage"></textarea> </p>
     </div>
 
     <div class="modal-footer">
+		<input type="hidden" name="user_id" value=0>
+		<input type="hidden" name="book_id" value="<%= @book.id %>">
         <button class="btn" data-dismiss="modal">取消</button>
-        <button id='btnsend' class="btn btn-primary">发送请求</button>
+        <button id='btnsendrequest' class="btn btn-primary">发送请求</button>
     </div>
 </div>
 

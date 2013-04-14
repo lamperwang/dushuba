@@ -20,7 +20,7 @@ Dushuba::Application.routes.draw do
   resources :profile
 
   match 'books/tag/:id' => 'books#tag'
-
+  match 'books/request' => 'books#requestbook'
 
 
   # The priority is based upon order of creation:
