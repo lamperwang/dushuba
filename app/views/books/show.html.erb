@@ -1,6 +1,6 @@
 <%- model_class = Book -%>
 <div class="page-header">
-  <h1><%= @book.name %></h1>
+  <h1 id="bookName"><%= @book.name %></h1>
 </div>
 
 
@@ -56,7 +56,13 @@
 
   <dt><b>谁有这本书:</b></dt>
   <dd>
-    <% @book.users.each do |user|  %>
+    <% @book.users.each do |user|
+	
+
+	
+	if user.id != current_user.id
+	
+	%>
 
 	<div class="btn-group">
 	  <a class="btn dropdown-toggle btn-success btn-mini" data-toggle="dropdown" href="#">
@@ -65,20 +71,25 @@
 	  </a>
 	  <ul class="dropdown-menu btn-mini">
 	    <li><a href="/profile/<%= user.id%>">查看<%= user.nickname %>的资料</a></li>
-		<li><a href="#">发消息给<%= user.nickname %></a></li>
-		<li><a href="#">向<%= user.nickname %>借阅</a></li>
+		
+		<li><a href="#" class="requestbook" user_id="<%= user.id %>" nickname="<%= user.nickname %>" data-toggle="modal">向<%= user.nickname %>借阅</a></li>
 	
 	  </ul>
 	</div>
 
 
-    <% end %>
+    <%end
+    end %>
   </dd>
 </dl>
 
 <dl class="dl-horizontal">  
   <dt><b>评价:</b></dt>
   <dd id="comments">
+	  
+	<% if @book.comments.length<1 %>
+	还没有评论，抢沙发吧
+	<%end%>
     <%= render @book.comments %>&nbsp;
   </dd>
   
@@ -90,7 +101,7 @@
 
     <div class="modal-header">
         <button class="close" data-dismiss="modal">x</button>
-        <h4>Are you sure remove this comment ?</h4>
+        <h4>确定删除这条评论吗？</h4>
     </div>
 <!--
     <div class="modal-body">
@@ -103,7 +114,25 @@
     </div>
 </div>
 
+<div class="modal hide" id="requestbookModal">
 
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">x</button>
+        <h4 class="modalTitle">向xxx借书</h4>
+    </div>
+
+    <div class="modal-body">
+		
+        <p> <textarea style="width:500px;height:50px;" id="requestbookmessage"></textarea> </p>
+    </div>
+
+    <div class="modal-footer">
+		<input type="hidden" name="user_id" value=0>
+		<input type="hidden" name="book_id" value="<%= @book.id %>">
+        <button class="btn" data-dismiss="modal">取消</button>
+        <button id='btnsendrequest' class="btn btn-primary">发送请求</button>
+    </div>
+</div>
 
 
 <div class="form-actions">

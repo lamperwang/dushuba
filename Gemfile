@@ -52,7 +52,7 @@ gem 'omniauth-oauth'
 gem 'omniauth-github'
 gem 'omniauth-facebook'
 gem "omniauth-google-oauth2"
-
+gem 'omniauth-tqq-oauth2'
 gem 'omniauth-qq'
-#gem 'omniauth-weibo-oauth2'
+gem 'omniauth-weibo-oauth2'
 

@@ -19,7 +19,27 @@
 <% end -%>
 
 <%- if devise_mapping.omniauthable? %>
+
+  <div>亲，您也可以使用下面的帐户登录哦：<BR>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %><br />
+    <%=  
+	if provider.to_s=='tqq2'
+	  link_to  (image_tag 'http://mat1.gtimg.com/app/opent/images/wiki/resource/weiboicon24.png',:boder=>0, :width=>20,:alt=>'使用腾讯微博帐户登录'), omniauth_authorize_path(resource_name, provider)
+
+	elsif provider.to_s == 'qq_connect'
+          link_to  (image_tag '/assets/qq.png',:boder=>0, :alt=>'使用QQ登
+录'), omniauth_authorize_path(resource_name, provider)
+
+        elsif provider.to_s == 'weibo'
+          link_to  (image_tag '/assets/weibo.png',:boder=>0, :alt=>'使用微博帐户登
+录'), omniauth_authorize_path(resource_name, provider)
+
+	elsif provider.to_s == 'github'
+	  link_to  (image_tag '/assets/github.jpeg',:boder=>0, :width=>20, :alt=>'使用Github帐户登录'), omniauth_authorize_path(resource_name, provider)
+	else
+	  link_to "Sign in with #{provider.to_s.titleize}" , omniauth_authorize_path(resource_name, provider)
+	end
+	 %>
   <% end -%>
+  </div>
 <% end -%>

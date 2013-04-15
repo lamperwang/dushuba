@@ -19,9 +19,53 @@ $(function(){
   /* Your javascripts goes here... */
 
 
-    $('#delCommentModal').modal({center:true,show:false});
 
+    //send request book
+	
+	$('.requestbook').on('click',function(){
+		
+		$('#requestbookModal').modal({center:true,show:true});
+		$('.modalTitle').html("向"+ $(this).attr('nickname')+"借《"+$('#bookName').html()+"》，说点啥：");
+		
+		$('#requestbookModal').find('input[name=user_id]').val($(this).attr('user_id'));
+		
+		return false;
+		
+		
+	});
+	
+    $('#btnsendrequest').on('click',function(){
+		
+		var message = $('#requestbookmessage').val();
 
+		var user_id = $('#requestbookModal').find('input[name=user_id]').val()
+		var book_id = $('#requestbookModal').find('input[name=book_id]').val();
+	
+
+		$.ajax({
+            url:'/books/request',
+            dataType:'json',
+            data: {'book_id':book_id, 'user_id':user_id, 'message':message }, // send whatever here...
+            type: 'POST',
+            success:function(data){
+				if(data.ret==0){
+					$('#requestbookModal').modal('hide');
+					alert(data.data);
+					
+				}
+				else
+                  alert(data.data);
+            },
+			error:function(data){
+				alert(data.data);
+			}
+        });
+
+		return false;
+    });  
+	
+	
+	//delete comment
     $("#comments a").on('click',  function(event) {
         event.preventDefault(); // prevent the click from linking anywhere
 

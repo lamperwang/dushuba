@@ -11,7 +11,10 @@ class ProfileController < ApplicationController
   def show
     
     @user = User.find(params[:id])
-    
+
+    @RequestMyBooks=UserBookRequest.joins('inner join user_books a on a.id=user_book_requests.user_book_id and a.user_id='+@user.id.to_s)
+
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user}

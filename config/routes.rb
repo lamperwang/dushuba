@@ -5,9 +5,8 @@ Dushuba::Application.routes.draw do
   get "home/index"
 
   #devise_for :users
-  devise_for :users, :omniauth_providers => [:github], :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :omniauth_providers => [:weibo, :github, :tqq2, :qq_connect], :controllers => { :registrations => "registrations", :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  devise_for :users, :omniauth_providers => [:tqq], :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   devise_scope :user do
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
@@ -21,7 +20,7 @@ Dushuba::Application.routes.draw do
   resources :profile
 
   match 'books/tag/:id' => 'books#tag'
-
+  match 'books/request' => 'books#requestbook'
 
 
   # The priority is based upon order of creation:

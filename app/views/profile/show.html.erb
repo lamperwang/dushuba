@@ -5,7 +5,10 @@
 
 <dl class="dl-horizontal">
   
-
+	<% if @user.head %>
+  <dt><strong></strong></dt>
+  <dd><%= image_tag @user.head %></dd>
+  <% end %>
   <dt><strong>爱好特长:</strong></dt>
   <dd>IT 写作 体育</dd>
   
@@ -44,7 +47,62 @@
 	  end%>
 	
   </dd>
-  
 
+
+  <% if @user.id== current_user.id %> 
+  <div class="clearfix"></div> 
+  <dt>借书申请：</dt>
+  <dd>
+
+    <table style="width:700px;">
+	<tr><td>书名</td><td>借阅人</td><td>申请时间</td><td>状态</td><td>说明</td><td>操作</td></tr>
+    <% @RequestMyBooks.each do |r| %>
+	<tr>
+	<td><%= link_to r.user_book.book.name, r.user_book.book %></td>
+	<td><i><%= link_to r.user.nickname, '/profile/'+r.user.id.to_s %></i></td>
+	<td><%= l(r.created_at, :format=>:short)%></td>
+	<td></td>
+	<td><%= r.message %></td>
+	<td>
+		<div class="btn-group">
+          <a class="btn dropdown-toggle btn-success btn-mini" data-toggle="dropdown" href="#">
+           处理 
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu btn-mini">
+            <li><a href='#'>同意</a></li>
+            <li><a href='#'>拒绝</a></li> 
+          </ul>
+        </div>
+
+	</td>
+
+	</tr>
+    <%end%>  
+    </table>
+
+  </dd>
+  <%end %>
+
+
+  <div class="clearfix"></div>
+  <dt>借书纪录：</dt>
+  <dd>
+
+    <table style="width:700px;">
+        <tr><td>书名</td><td>书主</td><td>申请时间</td><td>状态</td><td>说明</td></tr>
+    <% @user.user_book_requests.each do |r| %>
+        <tr>
+        <td><%= link_to r.user_book.book.name, r.user_book.book %></td>
+	<td><i><%= link_to r.user_book.user.nickname, '/profile/'+r.user_book.user.id.to_s  %></i></td>
+        <td><%= l(r.created_at, :format=>:short)%></td>
+        <td></td>
+        <td><%= r.message %></td>
+
+        </tr>
+    <%end%>
+    </table>
+
+  </dd>
 
 </dl>
