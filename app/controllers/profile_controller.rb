@@ -12,7 +12,7 @@ class ProfileController < ApplicationController
     
     @user = User.find(params[:id])
 
-    @RequestMyBooks=UserBookRequest.joins('inner join user_books a on a.id=user_book_requests.user_book_id and a.user_id='+@user.id.to_s)
+    @RequestMyBooks=UserBookRequest.joins(:user_book, ' and user_books.user_id='+@user.id.to_s).joins(:request_user)
 
 
     respond_to do |format|

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130411144543) do
+ActiveRecord::Schema.define(:version => 20130416102555) do
 
   create_table "book_tagships", :force => true do |t|
     t.integer  "book_id"
@@ -66,11 +66,11 @@ ActiveRecord::Schema.define(:version => 20130411144543) do
 
   create_table "user_book_requests", :force => true do |t|
     t.integer  "user_book_id"
-    t.integer  "user_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.text     "message"
     t.string   "request_by"
+    t.integer  "request_by_id"
   end
 
   create_table "user_books", :force => true do |t|

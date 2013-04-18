@@ -181,7 +181,7 @@ class BooksController < ApplicationController
     @user_book = UserBook.where(:user_id=>user_id, :book_id=>book_id).first
 
     respond_to do |format|
-      @user_book_request = UserBookRequest.new(:user_book=>@user_book,:user=>current_user, :message=>message, :request_by=>current_user.nickname)
+      @user_book_request = UserBookRequest.new(:user_book=>@user_book,:request_by_id=>current_user.id, :message=>message, :request_by=>current_user.nickname)
       @user_book_request.save() 
       format.json {render :json=>{:ret=>0, :data=>'Request send successful!'} }
     end

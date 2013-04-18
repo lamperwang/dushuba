@@ -49,7 +49,7 @@
   </dd>
 
 
-  <% if @user.id== current_user.id %> 
+  <% if @user.id== current_user.id && @RequestMyBooks.length>0 %> 
   <div class="clearfix"></div> 
   <dt>借书申请：</dt>
   <dd>
@@ -59,10 +59,12 @@
     <% @RequestMyBooks.each do |r| %>
 	<tr>
 	<td><%= link_to r.user_book.book.name, r.user_book.book %></td>
-	<td><i><%= link_to r.user.nickname, '/profile/'+r.user.id.to_s %></i></td>
+	
+	
+	<td><i><%= link_to r.request_user.nickname, '/profile/'+r.request_user.id.to_s %></i></td>
 	<td><%= l(r.created_at, :format=>:short)%></td>
 	<td></td>
-	<td><%= r.message %></td>
+	<td><%= r.message %> </td>
 	<td>
 		<div class="btn-group">
           <a class="btn dropdown-toggle btn-success btn-mini" data-toggle="dropdown" href="#">
@@ -84,7 +86,7 @@
   </dd>
   <%end %>
 
-
+  <% if @user.user_book_requests.count>0 %>
   <div class="clearfix"></div>
   <dt>借书纪录：</dt>
   <dd>
@@ -104,5 +106,6 @@
     </table>
 
   </dd>
+  <%end%>
 
 </dl>
