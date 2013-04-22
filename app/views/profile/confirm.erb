@@ -1,0 +1,28 @@
+<h2>请补充您的个人资料：</h2>
+
+
+<%= form_for(@user, :url => '/profile/confirm', :html => { :method => :put }) do |f| %>
+
+
+  <div><%= f.label :email, 'Email地址：' %></div>
+  <div><%= f.email_field :email, :autofocus => true %></div>
+
+  
+  <div><%= f.label :nickname,  '用户名：' %></div>
+  <div><%= f.text_field :nickname %></div>
+  
+  <div><%= f.label :real_name,  '真实姓名：' %></div>
+  <div><%= f.text_field :real_name %></div>
+  
+  
+  
+  <div><%= f.label :identity,  '读者条码：' %></div>
+  <div><%= f.text_field :identity %></div>
+
+  
+
+  <div><%= f.submit "提交", :class=>'btn btn-primary' %></div>
+<% end %>
+
+
+

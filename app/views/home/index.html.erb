@@ -1,50 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>爱读书 － 您的在线图书馆</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="description" content="book share online club.">
+<meta name="keywords" content="book share">
 
-    <div id="myCarousel" class="carousel slide">
-      <div class="carousel-inner">
-        
-        <div class="item active">
-          <%=image_tag 'examples/slide-01.jpg' %>
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>分享书籍、传递知识</h1>
-              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <a class="btn btn-large btn-primary" href="/users/sign_up">马上加入</a>
-            </div>
-          </div>
-        </div>
-        
-        
-        <div class="item">
-   	      <%=image_tag 'examples/slide-02.jpg' %>
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <a class="btn btn-large btn-primary" href="#">Learn more</a>
-            </div>
-          </div>
-        </div>
-        
-        
-        <div class="item">
-	      <%=image_tag 'examples/slide-03.jpg' %>
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>One more for good measure.</h1>
-              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <a class="btn btn-large btn-primary" href="#">Browse gallery</a>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-    </div><!-- /.carousel -->
+<link rel="stylesheet" type="text/css" href="web/stylesheets/old.min.css?1365532258">
+<link rel="stylesheet" type="text/css" href="web/stylesheets/common.min.css?1365532258">
+<script src="web/javascripts/jquery.min.js"></script>
+<script src="web/javascripts/dalimodal.js"></script>
+<script src="web/javascripts/base.js?1365532258"></script>
 
 
+</head>
+<body>
+<header id="home">
 
-      
+<div class="line"></div>
+	<div class="container">
+	<h1><a href="/" id="logo"><span>爱读书、爱分享</span></a></h1>
+	<a href="/" id="logoLink"><img src="public/mashape_logo.png" id="logoImg" alt="Mashape"></a>
+	<canvas id="logoCanvas" width="165" height="55"></canvas>
+	<a href="/login" id="headerLogin" ><em><strong>Login</strong></em></a>	<a href="/signup" id="headerSignup" ><em><strong>+ Join Us</strong></em></a>
+<form action="https://www.mashape.com/sessions/login" method="post" accept-charset="utf-8" enctype="application/x-www-form-urlencoded" class="popup login" novalidate="" ><input type="hidden" name="authenticityToken" value="87d93ce09bcff6e999090df02734a0feb223aa4a">
+	<div class="arrow"></div>
+	<h3>IDOSHU Login <a href="/signup" id="signupLink" >Signup</a> </h3>
+	<input name="usernameOrEmail" type="text" placeholder="Username or email" class="first" required>
+	<input name="password" type="password" placeholder="Password" required>
+	<input type="submit" class="blue" value="Login">
+	<input type="hidden" name="redirectUrl" value="">
+	<a href="/forgotpassword" class="forget-pass" >忘记密码？</a>	<div class="or"><hr><span>or</span><hr></div>
+	<a class="button black" href="/startgithublogin"><span>使用GitHub登录</span></a>
+
+</form>
+<form action="/sessions/signup" method="post" accept-charset="utf-8" enctype="application/x-www-form-urlencoded" class="popup signup" novalidate="" >
+	<div class="arrow"></div>
+	<h3>加入IDOSHU社区</h3>
+	<input type="hidden" name="isHuman" value="false">
+	<input name="username" type="text" placeholder="Desired Username" class="first" required>
+	<input name="email" type="text"	placeholder="Email Address" required>
+	<input name="password" type="password" placeholder="Password" required>
+	<input type="submit" class="green" value="Create Account">
+	<input type="hidden" name="redirectUrl" value="">
+	<div class="or"><hr><span>or</span><hr></div>
+	<a class="button black" href="/startgithublogin"><span>使用GitHub登录</span></a>
+	<p>By signing up, you agree to the <a href="/terms">Terms</a> and <a href="/privacy">Privacy Policy</a> of IDOSHU.</p>
+
+</form>
+<script>$( function () {
+	$( 'input[name="redirectUrl"]').val( window.location.pathname );
+	var baseSignup = $( '#signupLink' ).attr( 'href' );
+	$( '#signupLink' ).attr( 'href', baseSignup + "?redirectUrl=" + encodeURIComponent( window.location.pathname ) );
+});</script>		<ul>
+			<li><a href="/howitworks" >规则说明</a></li>
+			<li><a href="/docs" >在线帮助</a></li>
+			<li><a href="mailto:support@idoshu.com">寻求支持</a></li>
+		</ul>
+
+	<h2 style="width:330px;">在线的图书分享社区</h2>
+
+	<h3 style="width:800px;font-size:14px;">您可以登记自己的图书、借阅社区其他成员的图书；还可以发表书评、结识兴趣相投的朋友</h3>
+	 <form action="/search" method="get" accept-charset="utf-8" enctype="application/x-www-form-urlencoded" >		<div id="searchIcon"></div>
+		<input id="header-search" name="query" type="text" placeholder="寻找图书，可以使用或ISBN" autofocus>
+		<input type="submit" value="寻找">
+		<a href="/books" id="explore" ><span><i class="icon-globe"></i>&nbsp; 随便看看...</span></a>
+</form></div></header>
+
+<!-- svg filter desaturation -->
+<svg height="0" width="0"><filter id="desaturate">
+<feColorMatrix type="matrix" values="0.3333 0.3333 0.3333 0 0
+                                     0.3333 0.3333 0.3333 0 0
+                                     0.3333 0.3333 0.3333 0 0
+                                     0      0      0      1 0"/>
+</filter></svg>
+<style type="text/css">
+	.apiContainer .api img {
+		filter: url(#desaturate); /* Firefox */
+		filter: gray; /* IE6-9 */
+		-webkit-filter: grayscale(1); /* Google Chrome & Webkit Nightlies */
+	}
+</style>
+
+<section class="carousel"><div class="container">
+
+<h3>社区成员已经贡献 <span>2099</span> 本图书<!-- across <span>68</span> countries.--></h3>
+
+<div id="slider">
+<div class="shadow left"></div>
+<div class="shadow right"></div>
+<div class="container">
 
 
-      
+	<% @books.each do |book| %>
+<div class="item"><div class="wrapper">
+
+<%= link_to (image_tag book.cover.url(:thumb)), book_path(book) %>
+
+<div class="info">
+<h4><%= link_to book.name, book_path(book)%></h4>
+<a class="user" href="/profile/<%=book.users.first.id %>"><%=book.users.first.nickname %></a><br>
+<div>ISBN:<span><%=book.isbn%></span></div>
+<div>出版社:<span><%=book.publish_by %></span></div>
+</div>
+<!--
+<hr>
+<p class="description"><%= simple_format h(book.description) %></p>
+-->
+</div></div>
+
+<% end %>
+
+
+</div></div>
+
+<div id="scroller"><span></span></div>
+
+</div></section>
+
+<section class="subfooter"><div class="container cf">
+<div id="media">
+	<a href="#" class="oreilly"><img src="https://s3.amazonaws.com/mashape-static-production/web/assets/media_oreilly.png" alt="O'Reilly Radar"></a>
+	<a href="#" class="rww"><img src="https://s3.amazonaws.com/mashape-static-production/web/assets/media_rww.png" alt="ReadWriteWeb"></a>
+	<a href="#" class="tc"><img src="https://s3.amazonaws.com/mashape-static-production/web/assets/media_tc.png" alt="TechCrunch"></a>
+	<a href="#" class="gigaom"><img src="https://s3.amazonaws.com/mashape-static-production/web/assets/media_gigaom.png" alt="Gigaom"></a>
+	<a href="#" class="mashable"><img src="https://s3.amazonaws.com/mashape-static-production/web/assets/media_mashable.png" alt="Mashable"></a>
+	<a href="#" class="forbes"><img src="https://s3.amazonaws.com/mashape-static-production/web/assets/media_forbes.png" alt="Forbes"></a>
+	<a href="#" class="d"><img src="https://s3.amazonaws.com/mashape-static-production/web/assets/media_d.png" alt="AllThingsDigital"></a>
+</div>
+</div></section>
+
+<div id="footer" class=" ">
+	<div class="container">
+		<div class="sidebar">
+			<h4>&copy; 2013 爱读书.</h4>
+		</div>
+		
+		
+	</div>
+</div>
+<div class='mashape-core'><div id="meta-info"
+  data-redirect-url="/login"
+></div>
+
+<!--
+<script src="web/javascripts/new/mashape.meta.js"></script>
+<script src="web/javascripts/new/mashape.core.js"></script>
+<script src="web/javascripts/new/mashape.events.js"></script>
+-->
+</div>
+<!--
+<script src="web/javascripts/mashape.min.js?1365532258"></script>
+-->
+</body>
+</html>

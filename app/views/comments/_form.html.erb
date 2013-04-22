@@ -1,7 +1,7 @@
 <%= form_for([@book, @book.comments.build], :html=>{:class=>:ajax, :'data-append'=>'#comments'} )  do |f| %>
   <div class="field hide">
     <div><%= f.label :commenter %></div>
-    <%= f.text_field :commenter, :value=>current_user.nickname %>
+    <%= f.text_field :commenter, :value=>current_user.nickname if current_user%>
   </div>
   <div class="field">
     <%= f.text_area :body, :size=>'60x3' %>

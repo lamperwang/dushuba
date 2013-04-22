@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require 'csv'
+require '../app/model/user_invites.rb'
+
+csv_text = File.read('codes.csv')
+csv = CSV.parse(csv_text, :headers=>true)
+csv.each do |row|
+  row = row.to_hash.with_indifferent_access
+  UserInvite.create!(row.to_hash.symbolize_keys)
+
+end
+

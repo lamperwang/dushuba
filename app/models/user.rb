@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :nickname, :email, :password, :password_confirmation, :remember_me
-  attr_accessible :provider, :uid, :head
+  attr_accessible :provider, :uid, :head, :real_name, :unit, :identity
 
   has_many :user_books, :dependent => :destroy 
   has_many :books, :through=>:user_books
@@ -96,6 +96,13 @@ class User < ActiveRecord::Base
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+  
+  def is_actived?
+    
+    return self.identity? && self.real_name?
+    
+    
   end
 
 end
