@@ -21,6 +21,12 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def new
+    super
+    #render :layout => false
+    
+  end
+
   private
 
   # check if we need password to update user data
