@@ -291,6 +291,7 @@ $( ".popup.add" ).find( "input[type='submit']" ).focus( function () {
 /* homepage logos */
 if ($( "#home" ).length) {
 ( function () {
+    return;
 	var init = "", img = [], opacity,
 		apiCount = 64, rows = 4, randomness = Math.floor( Math.random() * apiCount );
 		api_ids = $( "header" ).attr( "data-apis" ).split( "," );

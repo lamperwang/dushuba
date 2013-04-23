@@ -1,1 +1,28 @@
-@font-face{font-family:'Arimo';font-style:normal;font-weight:700;src:local('Arimo Bold'),local('Arimo-Bold'),url(https://themes.googleusercontent.com/static/fonts/arimo/v4/UnXpojilM3XslYxUnWuVe_esZW2xOQ-xsNqO47m55DA.woff) format('woff');}@font-face{font-family:'Arimo';font-style:normal;font-weight:400;src:local('Arimo'),url(https://themes.googleusercontent.com/static/fonts/arimo/v4/wZLYhRRxZWGToTRP78bqJQ.woff) format('woff');}@font-face{font-family:'Lato';font-style:normal;font-weight:700;src:local('Lato Bold'),local('Lato-Bold'),url(https://themes.googleusercontent.com/static/fonts/lato/v6/wkfQbvfT_02e2IWO3yYueQ.woff) format('woff');}@font-face{font-family:'Lato';font-style:normal;font-weight:400;src:local('Lato Regular'),local('Lato-Regular'),url(https://themes.googleusercontent.com/static/fonts/lato/v6/9k-RPmcnxYEPm8CNFsH2gg.woff) format('woff');}
+@font-face
+{
+	font-family:'Arimo';
+	font-style:normal;
+	font-weight:700;
+	src:local('Arimo Bold'),local('Arimo-Bold'),url(/web/fonts/UnXpojilM3XslYxUnWuVe_esZW2xOQ-xsNqO47m55DA.woff) format('woff');
+}
+@font-face
+{
+	font-family:'Arimo';
+	font-style:normal;
+	font-weight:400;
+	src:local('Arimo'),url(/web/fonts/wZLYhRRxZWGToTRP78bqJQ.woff) format('woff');
+}
+@font-face
+{
+	font-family:'Lato';
+	font-style:normal;
+	font-weight:700;
+	src:local('Lato Bold'),local('Lato-Bold'),url(/web/fonts/wkfQbvfT_02e2IWO3yYueQ.woff) format('woff');
+}
+@font-face
+{
+	font-family:'Lato';
+	font-style:normal;
+	font-weight:400;
+	src:local('Lato Regular'),local('Lato-Regular'),url(/web/fonts/9k-RPmcnxYEPm8CNFsH2gg.woff) format('woff');
+}

@@ -1,71 +1,86 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <title>爱读书 － 您的在线图书馆</title>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="description" content="book share online club.">
-<meta name="keywords" content="book share">
-
-<link rel="stylesheet" type="text/css" href="web/stylesheets/old.min.css?1365532258">
-<link rel="stylesheet" type="text/css" href="web/stylesheets/common.min.css?1365532258">
-<script src="web/javascripts/jquery.min.js"></script>
-<script src="web/javascripts/dalimodal.js"></script>
-<script src="web/javascripts/base.js?1365532258"></script>
 
 
-</head>
+<link rel="stylesheet" type="text/css" href="/web/stylesheets/old.min.css">
+<link rel="stylesheet" type="text/css" href="/web/stylesheets/common.min.css">
+
+
+<script src="/web/javascripts/jquery.min.js"></script>
+<script src="/web/javascripts/dalimodal.js"></script>
+<script src="/web/javascripts/base.js"></script></head>
 <body>
-<header id="home">
+<header id="home" >
 
 <div class="line"></div>
 	<div class="container">
-	<h1><a href="/" id="logo"><span>爱读书、爱分享</span></a></h1>
-	<a href="/" id="logoLink"><img src="public/logo.png" id="logoImg" alt="爱读书"></a>
+	<h1><a href="/" id="logo"><span>爱读书</span></a></h1>
+	<a href="/" id="logoLink"><img src="/public/logo.png" id="logoImg" alt="爱读书"></a>
 	<canvas id="logoCanvas" width="165" height="55"></canvas>
-	<a href="/login" id="headerLogin" ><em><strong>Login</strong></em></a>	<a href="/signup" id="headerSignup" ><em><strong>+ Join Us</strong></em></a>
-<form action="https://www.mashape.com/sessions/login" method="post" accept-charset="utf-8" enctype="application/x-www-form-urlencoded" class="popup login" novalidate="" ><input type="hidden" name="authenticityToken" value="87d93ce09bcff6e999090df02734a0feb223aa4a">
+	
+    <% if user_signed_in? %>
+    
+      <%=link_to current_user.nickname, edit_user_registration_path ,:id=>'headerLogin'%>，
+      <%= link_to '登出', destroy_user_session_path, :method => :delete ,:id=>'headerSignup'%>
+    
+  <% else %>
+    
+  
+	<a href="/login" id="headerLogin" ><em><strong>登录</strong></em></a>	<a href="/signup" id="headerSignup" ><em><strong>+ 加入社区</strong></em></a>			
+<form action="/sessions/login" method="post" accept-charset="utf-8" enctype="application/x-www-form-urlencoded" class="popup login" novalidate="" >
 	<div class="arrow"></div>
-	<h3>IDOSHU Login <a href="/signup" id="signupLink" >Signup</a> </h3>
-	<input name="usernameOrEmail" type="text" placeholder="Username or email" class="first" required>
-	<input name="password" type="password" placeholder="Password" required>
+	<h3>登录爱读书 <a href="/signup" id="signupLink" >注册</a> </h3>
+	<input name="usernameOrEmail" type="text" placeholder="Email地址" class="first" required> 
+	<input name="password" type="password" placeholder="密码" required>
 	<input type="submit" class="blue" value="Login">
 	<input type="hidden" name="redirectUrl" value="">
-	<a href="/forgotpassword" class="forget-pass" >忘记密码？</a>	<div class="or"><hr><span>or</span><hr></div>
-	<a class="button black" href="/startgithublogin"><span>使用GitHub登录</span></a>
+	<a href="/forgotpassword" class="forget-pass" >忘记密码了？</a>	<div class="or"><hr><span>或者</span><hr></div>
+	<a class="button black" href="/startgithublogin"><span>Login with GitHub</span></a>
 
-</form>
+</form>		
 <form action="/sessions/signup" method="post" accept-charset="utf-8" enctype="application/x-www-form-urlencoded" class="popup signup" novalidate="" >
 	<div class="arrow"></div>
-	<h3>加入IDOSHU社区</h3>
+	<h3>加入爱读书社区</h3>
 	<input type="hidden" name="isHuman" value="false">
-	<input name="username" type="text" placeholder="Desired Username" class="first" required>
-	<input name="email" type="text"	placeholder="Email Address" required>
-	<input name="password" type="password" placeholder="Password" required>
-	<input type="submit" class="green" value="Create Account">
+	<input name="username" type="text" placeholder="用户名" class="first" required> 
+	<input name="email" type="text"	placeholder="Email地址" required> 
+	<input name="password" type="password" placeholder="密码" required> 
+	<input type="submit" class="green" value="注册">
 	<input type="hidden" name="redirectUrl" value="">
-	<div class="or"><hr><span>or</span><hr></div>
-	<a class="button black" href="/startgithublogin"><span>使用GitHub登录</span></a>
-	<p>By signing up, you agree to the <a href="/terms">Terms</a> and <a href="/privacy">Privacy Policy</a> of IDOSHU.</p>
+	<div class="or"><hr><span>或者</span><hr></div>
+	<a class="button black" href="/startgithublogin"><span>Signup with GitHub</span></a>
+	<p>注册代表您已经同意<a href="/terms">社区法则</a> 和 <a href="/privacy">隐私</a></p>
 
 </form>
 <script>$( function () {
 	$( 'input[name="redirectUrl"]').val( window.location.pathname );
 	var baseSignup = $( '#signupLink' ).attr( 'href' );
 	$( '#signupLink' ).attr( 'href', baseSignup + "?redirectUrl=" + encodeURIComponent( window.location.pathname ) );
-});</script>		<ul>
-			<li><a href="/howitworks" >规则说明</a></li>
-			<li><a href="/docs" >在线帮助</a></li>
-			<li><a href="mailto:support@idoshu.com">寻求支持</a></li>
+});</script>
+
+<% end %>
+		<ul>
+
+
+			<li><a href="/howitworks" >How It Works</a></li>
+			<li><a href="/docs" >Documentation</a></li>
+			<li><a href="mailto:support@idoshu.com">Support</a></li>
+
 		</ul>
 
 	<h2 style="width:330px;">在线的图书分享社区</h2>
-
-	<h3 style="width:800px;font-size:14px;">您可以登记自己的图书、借阅社区其他成员的图书；还可以发表书评、结识兴趣相投的朋友</h3>
+	
+	<h3 style="width:800px;font-size:14px;">您可以分享自己的图书、借阅社区其他成员的图书；还可以发表书评、结识兴趣相投的书友</h3>
 	 <form action="/search" method="get" accept-charset="utf-8" enctype="application/x-www-form-urlencoded" >		<div id="searchIcon"></div>
-		<input id="header-search" name="query" type="text" placeholder="寻找图书，可以使用或ISBN" autofocus>
-		<input type="submit" value="寻找">
-		<a href="/books" id="explore" ><span><i class="icon-globe"></i>&nbsp; 随便看看...</span></a>
+		<input id="header-search" name="query" type="text" placeholder="可以使用ISBN或书名进行搜索" autofocus>
+		<input type="submit" value="搜索">
+		<a href="/books" id="explore" ><span><i class="icon-globe"></i>&nbsp; 随便逛逛</span></a>	
 </form></div></header>
 
 <!-- svg filter desaturation -->
@@ -85,13 +100,12 @@
 
 <section class="carousel"><div class="container">
 
-<h3>社区成员已经贡献 <span>2099</span> 本图书<!-- across <span>68</span> countries.--></h3>
+<h3>社区书友已经贡献了 <span>2162</span> 本图书，就等您了，赶快加入吧！<!-- across <span>68</span> countries.--></h3>
 
 <div id="slider">
 <div class="shadow left"></div>
 <div class="shadow right"></div>
 <div class="container">
-
 
 	<% @books.each do |book| %>
 <div class="item"><div class="wrapper">
@@ -122,38 +136,26 @@
 <section class="subfooter"><div class="container cf">
 <div id="media">
 	<a href="#" class="oreilly"><img src="https://s3.amazonaws.com/mashape-static-production/web/assets/media_oreilly.png" alt="O'Reilly Radar"></a>
-	<a href="#" class="rww"><img src="https://s3.amazonaws.com/mashape-static-production/web/assets/media_rww.png" alt="ReadWriteWeb"></a>
-	<a href="#" class="tc"><img src="https://s3.amazonaws.com/mashape-static-production/web/assets/media_tc.png" alt="TechCrunch"></a>
-	<a href="#" class="gigaom"><img src="https://s3.amazonaws.com/mashape-static-production/web/assets/media_gigaom.png" alt="Gigaom"></a>
-	<a href="#" class="mashable"><img src="https://s3.amazonaws.com/mashape-static-production/web/assets/media_mashable.png" alt="Mashable"></a>
-	<a href="#" class="forbes"><img src="https://s3.amazonaws.com/mashape-static-production/web/assets/media_forbes.png" alt="Forbes"></a>
-	<a href="#" class="d"><img src="https://s3.amazonaws.com/mashape-static-production/web/assets/media_d.png" alt="AllThingsDigital"></a>
+	
 </div>
 </div></section>
-
-<div id="footer" class=" ">
+<div id="footer" class="loose ">
 	<div class="container">
 		<div class="sidebar">
-			<h4>&copy; 2013 爱读书.</h4>
+			<div>&copy; 2013 爱读书.</div>		
+			
+			
+
 		</div>
-		
-		
+		<div class="main">
+			<div class="constraint">
+				
+			</div>
+		</div>
 	</div>
 </div>
 
-<!--
-<div class='mashape-core'><div id="meta-info"
-  data-redirect-url="/login"
-></div>
-
-
-<script src="web/javascripts/new/mashape.meta.js"></script>
-<script src="web/javascripts/new/mashape.core.js"></script>
-<script src="web/javascripts/new/mashape.events.js"></script>
-
-</div>
-
-<script src="web/javascripts/mashape.min.js?1365532258"></script>
--->
 </body>
 </html>
+
+	
